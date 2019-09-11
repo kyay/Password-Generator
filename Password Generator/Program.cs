@@ -31,23 +31,26 @@ namespace Password_Generator
 
         static void Main(string[] args)
         {
-            string strPassword = "";
-            //Generate all 4 types
-            strPassword += GenerateRandomCharByType(CharType.Number);
-            strPassword += GenerateRandomCharByType(CharType.Lowercase);
-            strPassword += GenerateRandomCharByType(CharType.Uppercase);
-            strPassword += GenerateRandomCharByType(CharType.Special);
-
-            //Generate 2 more random letters
-            for (int i = 0; i < PASSWORD_LENGTH - 4; i++)
+            for (int i = 0; i < 20; i++)
             {
-                strPassword += GenerateRandomCharByType((CharType)rndRandomGenerator.Next(0, 4));
-            }
+                string strPassword = "";
+                //Generate all 4 types
+                strPassword += GenerateRandomCharByType(CharType.Number);
+                strPassword += GenerateRandomCharByType(CharType.Lowercase);
+                strPassword += GenerateRandomCharByType(CharType.Uppercase);
+                strPassword += GenerateRandomCharByType(CharType.Special);
 
-            // Randomize the order of all the alphanumeric characters in the password
-            strPassword = string.Join("", strPassword.OrderBy(x => rndRandomGenerator.Next(strPassword.Length)).ToArray());
-            //Show the password to the user
-            Console.WriteLine(strPassword);
+                //Generate 2 more random letters
+                for (int j = 0; j < PASSWORD_LENGTH - 4; j++)
+                {
+                    strPassword += GenerateRandomCharByType((CharType)rndRandomGenerator.Next(0, 4));
+                }
+
+                // Randomize the order of all the alphanumeric characters in the password
+                strPassword = string.Join("", strPassword.OrderBy(x => rndRandomGenerator.Next(strPassword.Length)));
+                //Show the password to the user
+                Console.WriteLine("Your pasword is: " + strPassword);
+            }
             Console.ReadKey();
         }
 
@@ -59,7 +62,7 @@ namespace Password_Generator
                 case CharType.Number:
                     return rndRandomGenerator.Next(1, 10).ToString()[0];
                 case CharType.Lowercase:
-                    return (char) ('a' + rndRandomGenerator.Next(0, 26));
+                    return (char)('a' + rndRandomGenerator.Next(0, 26));
                 case CharType.Uppercase:
                     return (char)('A' + rndRandomGenerator.Next(0, 26));
                 case CharType.Special:
