@@ -26,6 +26,9 @@ namespace Password_Generator
         //The required length of the password
         private const int PASSWORD_LENGTH = 6;
 
+        //The required length of the password
+        private const int PASSWORD_REQUIREMENTS_LENGTH = 4;
+
         //All the special characters allowed in the password
         private const string SPECIAL_CHARS = "!@#$%";
 
@@ -35,13 +38,11 @@ namespace Password_Generator
             {
                 string strPassword = "";
                 //Generate all 4 types
-                strPassword += GenerateRandomCharByType(CharType.Number);
-                strPassword += GenerateRandomCharByType(CharType.Lowercase);
-                strPassword += GenerateRandomCharByType(CharType.Uppercase);
-                strPassword += GenerateRandomCharByType(CharType.Special);
+                for (int j = 0; j < PASSWORD_REQUIREMENTS_LENGTH; j++)
+                    strPassword += GenerateRandomCharByType((CharType)j);
 
                 //Generate 2 more random letters
-                for (int j = 0; j < PASSWORD_LENGTH - 4; j++)
+                for (int j = 0; j < PASSWORD_LENGTH - PASSWORD_REQUIREMENTS_LENGTH; j++)
                 {
                     strPassword += GenerateRandomCharByType((CharType)rndRandomGenerator.Next(0, 4));
                 }
